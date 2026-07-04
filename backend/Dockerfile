@@ -1,18 +1,22 @@
-FROM dxjoke/tectonic-docker:latest AS tectonic_bin
-
 FROM python:3.12-slim-bookworm
 
 WORKDIR /app
 
+ARG TECTONIC_VERSION=0.15.0
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    curl \
     libmagic1 \
     libfontconfig1 \
     libgraphite2-3 \
     libharfbuzz0b \
     libicu72 \
+    && curl -fsSL \
+      "https://github.com/tectonic-typesetting/tectonic/releases/download/tectonic%40${TECTONIC_VERSION}/tectonic-${TECTONIC_VERSION}-x86_64-unknown-linux-gnu.tar.gz" \
+      | tar xz -C /usr/local/bin \
+    && chmod +x /usr/local/bin/tectonic \
     && rm -rf /var/lib/apt/lists/*
-
-COPY --from=tectonic_bin /usr/local/bin/tectonic /usr/local/bin/tectonic
 
 COPY pyproject.toml README.md ./
 COPY app ./app
