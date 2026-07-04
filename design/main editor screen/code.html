@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Resume Optimiser | Main Workspace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FAFAFA;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #E5E7EB;
+            border-radius: 10px;
+        }
+        .resume-card:hover .chevron-icon {
+            opacity: 1;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e4e1ee",
+                        "secondary-container": "#86f2e4",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#fcf8ff",
+                        "on-primary-fixed": "#0f0069",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "error-container": "#ffdad6",
+                        "surface": "#fcf8ff",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "surface-tint": "#4d44e3",
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "background": "#fcf8ff",
+                        "tertiary-fixed-dim": "#ffb695",
+                        "primary-fixed": "#e2dfff",
+                        "on-primary-container": "#dad7ff",
+                        "primary": "#3525cd",
+                        "on-tertiary-container": "#ffd2be",
+                        "on-background": "#1b1b24",
+                        "surface-dim": "#dcd8e5",
+                        "inverse-on-surface": "#f3effc",
+                        "tertiary-container": "#a44100",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#302f39",
+                        "secondary": "#006a61",
+                        "surface-container": "#f0ecf9",
+                        "on-secondary-fixed-variant": "#005049",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#eae6f4",
+                        "primary-container": "#4f46e5",
+                        "surface-container-low": "#f5f2ff",
+                        "tertiary-fixed": "#ffdbcc",
+                        "secondary-fixed": "#89f5e7",
+                        "on-tertiary-fixed": "#351000",
+                        "on-error": "#ffffff",
+                        "outline": "#777587",
+                        "on-surface": "#1b1b24",
+                        "outline-variant": "#c7c4d8",
+                        "on-secondary-fixed": "#00201d",
+                        "on-secondary-container": "#006f66",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#464555",
+                        "tertiary": "#7e3000",
+                        "inverse-primary": "#c3c0ff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e4e1ee"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.8px",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xxxl": "64px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "xxl": "48px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-section": ["Inter"],
+                        "headline-page": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "headline-section": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "headline-page": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-[#FAFAFA] text-on-surface h-screen flex flex-col overflow-hidden">
+<!-- Top Toolbar -->
+<header class="h-16 w-full flex items-center justify-between px-lg bg-surface border-b border-outline-variant z-30">
+<div class="flex items-center gap-sm">
+<nav class="flex items-center text-body-sm text-on-surface-variant">
+<span class="font-medium text-on-surface">Resume Optimiser</span>
+<span class="mx-2 opacity-50">/</span>
+<span class="font-medium">Jane Doe</span>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<button class="px-md py-sm font-label-md text-label-md text-on-surface-variant hover:bg-surface-container transition-colors rounded-lg flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">upload_file</span>
+                Re-upload resume
+            </button>
+<button class="px-md py-sm font-label-md text-label-md bg-primary text-on-primary hover:opacity-90 transition-all rounded-lg shadow-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                Download PDF
+            </button>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- Left Sidebar: Version History (240px) -->
+<aside class="w-[240px] flex-shrink-0 bg-surface border-r border-outline-variant flex flex-col">
+<div class="p-md border-b border-outline-variant flex items-center justify-between">
+<h2 class="font-headline-section text-headline-section">Version History</h2>
+<span class="bg-primary-container/10 text-primary px-2 py-0.5 rounded-full text-[12px] font-bold">4</span>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar p-sm">
+<div class="space-y-sm">
+<!-- Active Item -->
+<div class="group relative p-sm rounded-lg bg-primary-container/10 border border-primary/20 cursor-help" title="Preview only">
+<div class="flex items-start justify-between">
+<span class="text-label-md font-bold text-primary leading-tight">Tailored for: Senior Backend Engineer at Stripe</span>
+</div>
+<p class="text-[11px] text-on-surface-variant mt-1">2m ago</p>
+<div class="absolute inset-0 bg-transparent" title="Preview only"></div>
+</div>
+<!-- Inactive Items -->
+<div class="group relative p-sm rounded-lg hover:bg-surface-container transition-colors border border-transparent cursor-help">
+<div class="flex items-start justify-between">
+<span class="text-label-md font-medium text-on-surface leading-tight">Edited: Rewrote summary</span>
+</div>
+<p class="text-[11px] text-on-surface-variant mt-1">8m ago</p>
+</div>
+<div class="group relative p-sm rounded-lg hover:bg-surface-container transition-colors border border-transparent cursor-help">
+<div class="flex items-start justify-between">
+<span class="text-label-md font-medium text-on-surface leading-tight">Tailored for: ML Engineer at OpenAI</span>
+</div>
+<p class="text-[11px] text-on-surface-variant mt-1">15m ago</p>
+</div>
+<div class="group relative p-sm rounded-lg hover:bg-surface-container transition-colors border border-transparent cursor-help">
+<div class="flex items-start justify-between">
+<span class="text-label-md font-medium text-on-surface leading-tight">Original parse</span>
+</div>
+<p class="text-[11px] text-on-surface-variant mt-1">22m ago</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Center: Editor Workspace -->
+<main class="flex-1 overflow-y-auto custom-scrollbar bg-[#FAFAFA] p-xxl relative">
+<div class="max-w-[800px] mx-auto space-y-md pb-xxxl">
+<!-- Contact Card -->
+<div class="resume-card bg-white border border-outline-variant rounded-xl p-lg shadow-sm hover:border-outline transition-all relative cursor-pointer">
+<div class="flex justify-between items-start">
+<div>
+<h1 class="font-headline-page text-headline-page text-on-surface mb-xs">Jane Doe</h1>
+<p class="text-body-md text-on-surface-variant">Backend Engineer • San Francisco, CA</p>
+<p class="text-body-sm text-primary mt-1">jane.doe@example.com • linkedin.com/in/janedoe • github.com/jdoe</p>
+</div>
+<span class="chevron-icon material-symbols-outlined opacity-0 transition-opacity text-on-surface-variant">chevron_right</span>
+</div>
+</div>
+<!-- Summary Card (Editable) -->
+<div class="resume-card bg-white border border-outline-variant rounded-xl p-lg shadow-sm hover:border-outline transition-all relative">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-headline-section text-headline-section text-on-surface">Professional Summary</h3>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">auto_awesome</span>
+<span class="chevron-icon material-symbols-outlined opacity-0 transition-opacity text-on-surface-variant">chevron_right</span>
+</div>
+</div>
+<textarea class="w-full border-none focus:ring-0 p-0 text-body-md text-on-surface leading-relaxed resize-none bg-transparent" rows="3">Results-oriented Backend Engineer with 6+ years of experience in designing and scaling high-throughput distributed systems. Specialized in Go and Python with a focus on cloud-native architectures.</textarea>
+</div>
+<!-- Experience Card -->
+<div class="resume-card bg-white border border-outline-variant rounded-xl p-lg shadow-sm hover:border-outline transition-all relative">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-headline-section text-headline-section text-on-surface">Work Experience</h3>
+<span class="chevron-icon material-symbols-outlined opacity-0 transition-opacity text-on-surface-variant">chevron_right</span>
+</div>
+<div class="space-y-xl">
+<div class="relative pl-md border-l-2 border-surface-container-high">
+<div class="flex justify-between items-start mb-xs">
+<div>
+<h4 class="font-label-md text-label-md text-on-surface">Senior Software Engineer</h4>
+<p class="text-body-sm text-on-surface-variant">Stripe • 2021 — Present</p>
+</div>
+</div>
+<ul class="list-disc list-outside ml-4 space-y-xs text-body-md text-on-surface-variant">
+<li>Spearheaded the migration of legacy billing engines to a microservices architecture, improving throughput by 40%.</li>
+<li>Optimized database queries in PostgreSQL, reducing average latency from 200ms to 45ms for core API endpoints.</li>
+</ul>
+</div>
+<div class="relative pl-md border-l-2 border-surface-container-high">
+<div class="flex justify-between items-start mb-xs">
+<div>
+<h4 class="font-label-md text-label-md text-on-surface">Software Engineer</h4>
+<p class="text-body-sm text-on-surface-variant">Acme Corp • 2018 — 2021</p>
+</div>
+</div>
+<ul class="list-disc list-outside ml-4 space-y-xs text-body-md text-on-surface-variant">
+<li>Developed and maintained real-time data processing pipelines using Apache Kafka and Python.</li>
+<li>Reduced cloud infrastructure costs by 25% through strategic container orchestration optimizations.</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Skills Card -->
+<div class="resume-card bg-white border border-outline-variant rounded-xl p-lg shadow-sm hover:border-outline transition-all relative">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-headline-section text-headline-section text-on-surface">Technical Skills</h3>
+<span class="chevron-icon material-symbols-outlined opacity-0 transition-opacity text-on-surface-variant">chevron_right</span>
+</div>
+<div class="flex flex-wrap gap-sm">
+<span class="px-md py-1 bg-secondary-container/20 text-secondary border border-secondary/20 rounded-full text-body-sm font-medium">Go</span>
+<span class="px-md py-1 bg-secondary-container/20 text-secondary border border-secondary/20 rounded-full text-body-sm font-medium">Python</span>
+<span class="px-md py-1 bg-secondary-container/20 text-secondary border border-secondary/20 rounded-full text-body-sm font-medium">Kubernetes</span>
+<span class="px-md py-1 bg-secondary-container/20 text-secondary border border-secondary/20 rounded-full text-body-sm font-medium">AWS</span>
+<span class="px-md py-1 bg-secondary-container/20 text-secondary border border-secondary/20 rounded-full text-body-sm font-medium">PostgreSQL</span>
+<span class="px-md py-1 bg-secondary-container/20 text-secondary border border-secondary/20 rounded-full text-body-sm font-medium">gRPC</span>
+<span class="px-md py-1 bg-secondary-container/20 text-secondary border border-secondary/20 rounded-full text-body-sm font-medium">Terraform</span>
+</div>
+</div>
+<!-- Education Card -->
+<div class="resume-card bg-white border border-outline-variant rounded-xl p-lg shadow-sm hover:border-outline transition-all relative">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-headline-section text-headline-section text-on-surface">Education</h3>
+<span class="chevron-icon material-symbols-outlined opacity-0 transition-opacity text-on-surface-variant">chevron_right</span>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface">B.S. Computer Science</h4>
+<p class="text-body-sm text-on-surface-variant">Stanford University • 2014 — 2018</p>
+</div>
+</div>
+</div>
+<!-- Footer Notice -->
+<div class="fixed bottom-0 left-[240px] right-[360px] h-12 bg-surface-container/80 backdrop-blur-md border-t border-outline-variant flex items-center justify-center px-lg">
+<div class="flex items-center gap-xs text-[12px] text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">info</span>
+                    Changes saved in this tab only. Closing the tab clears your session.
+                </div>
+</div>
+</main>
+<!-- Right Panel: Actions (360px) -->
+<aside class="w-[360px] flex-shrink-0 bg-surface border-l border-outline-variant flex flex-col z-20">
+<!-- Tabs -->
+<div class="flex border-b border-outline-variant">
+<button class="flex-1 py-md font-label-md text-label-md border-b-2 border-primary text-primary transition-all" id="tab-tailor-btn" onclick="switchTab('tailor')">
+                    Tailor for Job
+                </button>
+<button class="flex-1 py-md font-label-md text-label-md border-b-2 border-transparent text-on-surface-variant hover:text-on-surface transition-all" id="tab-edit-btn" onclick="switchTab('edit')">
+                    Edit Section
+                </button>
+</div>
+<!-- Tab Content: Tailor -->
+<div class="flex-1 flex flex-col p-lg" id="panel-tailor">
+<div class="flex bg-surface-container p-1 rounded-lg mb-lg">
+<button class="flex-1 py-1.5 text-[13px] font-medium bg-white shadow-sm rounded-md text-on-surface">Paste text</button>
+<button class="flex-1 py-1.5 text-[13px] font-medium text-on-surface-variant">URL</button>
+</div>
+<div class="flex-1 flex flex-col gap-md">
+<label class="text-label-md font-medium text-on-surface">Job Description</label>
+<textarea class="flex-1 w-full p-md border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary text-body-sm bg-surface-bright resize-none" placeholder="Paste the job description here to optimize your resume for specific keywords and requirements..."></textarea>
+<button class="w-full py-md bg-primary text-on-primary rounded-xl font-bold hover:opacity-90 transition-all flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined">auto_awesome</span>
+                        Analyze &amp; Tailor Resume
+                    </button>
+</div>
+</div>
+<!-- Tab Content: Edit Section (Hidden by default) -->
+<div class="hidden flex-1 flex flex-col p-lg" id="panel-edit">
+<div class="space-y-lg flex-1">
+<div class="space-y-sm">
+<label class="text-label-md font-medium text-on-surface">Section</label>
+<div class="relative">
+<select class="w-full p-md pr-xl border border-outline-variant rounded-xl appearance-none bg-surface-bright focus:ring-primary focus:border-primary text-body-sm">
+<option>Professional Summary</option>
+<option>Work Experience: Stripe</option>
+<option>Work Experience: Acme Corp</option>
+<option>Technical Skills</option>
+</select>
+<span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 pointer-events-none opacity-50">expand_more</span>
+</div>
+</div>
+<div class="space-y-sm">
+<label class="text-label-md font-medium text-on-surface">Action</label>
+<div class="relative">
+<select class="w-full p-md pr-xl border border-outline-variant rounded-xl appearance-none bg-surface-bright focus:ring-primary focus:border-primary text-body-sm">
+<option>Rewrite to sound more senior</option>
+<option>Condense for space</option>
+<option>Emphasize cloud technologies</option>
+<option>Fix grammar and tone</option>
+</select>
+<span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 pointer-events-none opacity-50">expand_more</span>
+</div>
+</div>
+<div class="space-y-sm flex-1 flex flex-col">
+<label class="text-label-md font-medium text-on-surface">Natural Language Instruction</label>
+<textarea class="flex-1 w-full p-md border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary text-body-sm bg-surface-bright resize-none" placeholder="e.g. 'Rewrite the third bullet to emphasize my leadership role in the migration project...'"></textarea>
+</div>
+<button class="w-full py-md bg-primary text-on-primary rounded-xl font-bold hover:opacity-90 transition-all flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined">magic_button</span>
+                        Apply Edit
+                    </button>
+</div>
+</div>
+</aside>
+</div>
+<script>
+        function switchTab(tab) {
+            const tailorPanel = document.getElementById('panel-tailor');
+            const editPanel = document.getElementById('panel-edit');
+            const tailorBtn = document.getElementById('tab-tailor-btn');
+            const editBtn = document.getElementById('tab-edit-btn');
+
+            if (tab === 'tailor') {
+                tailorPanel.classList.remove('hidden');
+                editPanel.classList.add('hidden');
+                tailorBtn.classList.add('border-primary', 'text-primary');
+                tailorBtn.classList.remove('border-transparent', 'text-on-surface-variant');
+                editBtn.classList.remove('border-primary', 'text-primary');
+                editBtn.classList.add('border-transparent', 'text-on-surface-variant');
+            } else {
+                tailorPanel.classList.add('hidden');
+                editPanel.classList.remove('hidden');
+                editBtn.classList.add('border-primary', 'text-primary');
+                editBtn.classList.remove('border-transparent', 'text-on-surface-variant');
+                tailorBtn.classList.remove('border-primary', 'text-primary');
+                tailorBtn.classList.add('border-transparent', 'text-on-surface-variant');
+            }
+        }
+    </script>
+</body></html>

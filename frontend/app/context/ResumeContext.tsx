@@ -12,65 +12,111 @@ import {
 import type {
   AppState,
   PendingEdit,
+  PendingEditKind,
   ResumeSchema,
   VersionEntry,
 } from "@/types/resume";
 
 interface ResumeContextValue extends AppState {
+  currentLabel: string;
+  currentTimestamp: string;
   setResumeJson: (resume: ResumeSchema) => void;
-  setPendingEdit: (edit: PendingEdit | null, label?: string | null) => void;
+  updateResumeJson: (resume: ResumeSchema) => void;
+  setPendingEdit: (
+    edit: PendingEdit | null,
+    label?: string | null,
+    kind?: PendingEditKind | null,
+  ) => void;
   pendingEditLabel: string | null;
-  acceptEdit: (label?: string) => void;
+  acceptEdit: (label?: string, proposedResume?: ResumeSchema) => void;
   discardEdit: () => void;
 }
 
 const ResumeContext = createContext<ResumeContextValue | null>(null);
 
 export function ResumeContextProvider({ children }: { children: ReactNode }) {
-  const [resumeJson, setResumeJson] = useState<ResumeSchema | null>(null);
+  const [resumeJson, setResumeJsonState] = useState<ResumeSchema | null>(null);
   const [versionStack, setVersionStack] = useState<VersionEntry[]>([]);
   const [pendingEdit, setPendingEditState] = useState<PendingEdit | null>(null);
   const [pendingEditLabel, setPendingEditLabel] = useState<string | null>(null);
+  const [pendingEditKind, setPendingEditKind] =
+    useState<PendingEditKind | null>(null);
+  const [currentLabel, setCurrentLabel] = useState("Original parse");
+  const [currentTimestamp, setCurrentTimestamp] = useState(() =>
+    new Date().toISOString(),
+  );
+
+  const setResumeJson = useCallback((resume: ResumeSchema) => {
+    setResumeJsonState(resume);
+    setVersionStack([]);
+    setPendingEditState(null);
+    setPendingEditLabel(null);
+    setPendingEditKind(null);
+    setCurrentLabel("Original parse");
+    setCurrentTimestamp(new Date().toISOString());
+  }, []);
+
+  const updateResumeJson = useCallback((resume: ResumeSchema) => {
+    setResumeJsonState(resume);
+  }, []);
 
   const setPendingEdit = useCallback(
-    (edit: PendingEdit | null, label: string | null = null) => {
+    (
+      edit: PendingEdit | null,
+      label: string | null = null,
+      kind: PendingEditKind | null = null,
+    ) => {
       setPendingEditState(edit);
       setPendingEditLabel(label);
+      setPendingEditKind(edit ? (kind ?? "tailor") : null);
     },
     [],
   );
 
   const acceptEdit = useCallback(
-    (label?: string) => {
+    (label?: string, proposedResume?: ResumeSchema) => {
       if (!pendingEdit || !resumeJson) {
         return;
       }
 
-      const versionLabel = label ?? pendingEditLabel ?? "Accepted edit";
       const versionEntry: VersionEntry = {
         resumeJson,
-        label: versionLabel,
-        timestamp: new Date().toISOString(),
+        label: currentLabel,
+        timestamp: currentTimestamp,
       };
 
+      const nextLabel = label ?? pendingEditLabel ?? "Accepted edit";
+      const nextResume =
+        proposedResume ?? pendingEdit.proposedResumeJson;
+
       setVersionStack((current) => [...current, versionEntry]);
-      setResumeJson(pendingEdit.proposedResumeJson);
-      setPendingEdit(null);
+      setResumeJsonState(nextResume);
+      setCurrentLabel(nextLabel);
+      setCurrentTimestamp(new Date().toISOString());
+      setPendingEditState(null);
+      setPendingEditLabel(null);
+      setPendingEditKind(null);
     },
-    [pendingEdit, pendingEditLabel, resumeJson, setPendingEdit],
+    [currentLabel, currentTimestamp, pendingEdit, pendingEditLabel, resumeJson],
   );
 
   const discardEdit = useCallback(() => {
-    setPendingEdit(null);
-  }, [setPendingEdit]);
+    setPendingEditState(null);
+    setPendingEditLabel(null);
+    setPendingEditKind(null);
+  }, []);
 
   const value = useMemo<ResumeContextValue>(
     () => ({
       resumeJson,
       versionStack,
       pendingEdit,
+      pendingEditKind,
       pendingEditLabel,
+      currentLabel,
+      currentTimestamp,
       setResumeJson,
+      updateResumeJson,
       setPendingEdit,
       acceptEdit,
       discardEdit,
@@ -79,7 +125,12 @@ export function ResumeContextProvider({ children }: { children: ReactNode }) {
       resumeJson,
       versionStack,
       pendingEdit,
+      pendingEditKind,
       pendingEditLabel,
+      currentLabel,
+      currentTimestamp,
+      setResumeJson,
+      updateResumeJson,
       acceptEdit,
       discardEdit,
       setPendingEdit,

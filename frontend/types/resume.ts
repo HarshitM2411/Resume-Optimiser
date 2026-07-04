@@ -83,20 +83,26 @@ export interface PendingEdit {
   diff: DiffItem[];
 }
 
+export type PendingEditKind = "tailor" | "section";
+
 export interface AppState {
   resumeJson: ResumeSchema | null;
   versionStack: VersionEntry[];
   pendingEdit: PendingEdit | null;
+  pendingEditKind: PendingEditKind | null;
 }
 
 export interface ParseResponse {
   resume_json: ResumeSchema;
 }
 
-export interface TailorRequest {
-  resume_json: ResumeSchema;
+export interface JdSourceRequest {
   jd_text?: string;
   jd_url?: string;
+}
+
+export interface TailorRequest extends JdSourceRequest {
+  resume_json: ResumeSchema;
 }
 
 export interface EditRequest {

@@ -55,3 +55,13 @@ class SSRFError(URLFetchError):
 class PDFCompilationError(AppError):
     status_code = 500
     message = "PDF generation failed. Please review your edits and try downloading again."
+
+
+class UnsupportedTemplateError(AppError):
+    status_code = 422
+    message = "Unsupported template PDF."
+
+
+class TemplateValidationError(AppError):
+    status_code = 422
+    message = "Required template fields are missing."

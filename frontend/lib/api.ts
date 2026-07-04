@@ -1,10 +1,13 @@
 import type {
   EditRequest,
+  JDAnalysisSchema,
+  JdSourceRequest,
   ParseResponse,
   PdfRequest,
   PendingEditResponse,
   TailorRequest,
 } from "@/types/resume";
+import type { FormatResponse, TemplatePdfRequest } from "@/types/template";
 import { APIError } from "@/types/resume";
 
 export { APIError } from "@/types/resume";
@@ -44,6 +47,38 @@ export async function parseResume(
   return handleResponse<ParseResponse>(res);
 }
 
+export async function formatResume(
+  resumeFile: File,
+  templateFile: File,
+  signal?: AbortSignal,
+): Promise<FormatResponse> {
+  const formData = new FormData();
+  formData.append("resume_file", resumeFile);
+  formData.append("template_file", templateFile);
+
+  const res = await fetch(`${API_BASE}/api/v1/format`, {
+    method: "POST",
+    body: formData,
+    signal,
+  });
+
+  return handleResponse<FormatResponse>(res);
+}
+
+export async function analyzeJd(
+  body: JdSourceRequest,
+  signal?: AbortSignal,
+): Promise<JDAnalysisSchema> {
+  const res = await fetch(`${API_BASE}/api/v1/analyze-jd`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+    signal,
+  });
+
+  return handleResponse<JDAnalysisSchema>(res);
+}
+
 export async function tailorResume(
   body: TailorRequest,
   signal?: AbortSignal,
@@ -73,7 +108,7 @@ export async function editResume(
 }
 
 export async function downloadPdf(
-  body: PdfRequest,
+  body: PdfRequest | TemplatePdfRequest,
   signal?: AbortSignal,
 ): Promise<Blob> {
   const res = await fetch(`${API_BASE}/api/v1/pdf`, {

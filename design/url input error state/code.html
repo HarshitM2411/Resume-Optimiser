@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OptiResume | Editor Workspace</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#dad7ff",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb695",
+                        "surface-container-low": "#f5f2ff",
+                        "outline-variant": "#c7c4d8",
+                        "on-tertiary-fixed": "#351000",
+                        "on-tertiary-container": "#ffd2be",
+                        "on-surface": "#1b1b24",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#fcf8ff",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#dcd8e5",
+                        "on-secondary-container": "#006f66",
+                        "inverse-on-surface": "#f3effc",
+                        "primary-container": "#4f46e5",
+                        "inverse-primary": "#c3c0ff",
+                        "secondary-fixed": "#89f5e7",
+                        "surface-tint": "#4d44e3",
+                        "surface-container-highest": "#e4e1ee",
+                        "surface-container": "#f0ecf9",
+                        "primary-fixed": "#e2dfff",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "on-secondary-fixed-variant": "#005049",
+                        "on-secondary-fixed": "#00201d",
+                        "background": "#fcf8ff",
+                        "surface-variant": "#e4e1ee",
+                        "tertiary-fixed": "#ffdbcc",
+                        "on-primary-fixed": "#0f0069",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "primary": "#3525cd",
+                        "surface": "#fcf8ff",
+                        "inverse-surface": "#302f39",
+                        "tertiary-container": "#a44100",
+                        "outline": "#777587",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "on-background": "#1b1b24",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#006a61",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#7e3000",
+                        "secondary-container": "#86f2e4",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#eae6f4",
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#464555"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xxl": "48px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "xxxl": "64px",
+                        "xl": "32px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "headline-section": ["Inter"],
+                        "headline-page": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "display-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "headline-section": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "headline-page": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fcf8ff;
+            color: #1b1b24;
+            font-family: 'Inter', sans-serif;
+        }
+        .resume-preview-container {
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c7c4d8;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="overflow-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-lg h-xxxl max-w-[1280px] mx-auto bg-surface border-b border-outline-variant">
+<div class="flex items-center gap-xl">
+<span class="text-headline-page font-headline-page font-extrabold text-primary">OptiResume</span>
+<nav class="hidden md:flex items-center gap-lg">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="font-label-md text-label-md text-primary border-b-2 border-primary pb-1" href="#">My Resumes</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Job Matches</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high p-xs rounded-full">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high p-xs rounded-full">settings</button>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-md py-sm rounded-lg hover:opacity-90 transition-opacity">Export Resume</button>
+<div class="w-xxxl h-xxxl rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a smiling business person with a clean white background, soft lighting, and high-end executive portrait style consistent with a modern SaaS application interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZRToDl6CX1fqPK2OI4yxVyamD3PdfJ2UwRz5-QUfyn3BX48VxDR7l-u2K3rPa9NIJ3ueC2cbGY5-GJufkTOHTLEcXdm4DbZdKsg3JPGZfPwBr4kMP4TmrMlNnvK5DvK3S6NCffCrX0UckcDTshD_h3I0iCSRRfyzaZ62ZA-JhjapV-dMp3SkCBwyiHqf56657_2RRaoO4dNQl6pTNqbY1GFvgysjFbuYf8CJt9B-NifQFOK1TsAm2lqs0ZnmEWZp9cn4QJLnSlRs"/>
+</div>
+</div>
+</header>
+<!-- Sidebar (Left) -->
+<aside class="fixed left-0 top-xxxl h-[calc(100vh-64px)] w-[260px] flex flex-col py-md bg-surface border-r border-outline-variant z-40">
+<div class="px-md mb-lg">
+<h2 class="font-headline-section text-headline-section text-on-surface">Sections</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">5 changes pending</p>
+</div>
+<nav class="flex-1 space-y-xs">
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Contact Info</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-primary font-bold border-r-2 border-primary bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">work</span>
+<span class="font-label-md text-label-md">Experience</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-label-md text-label-md">Education</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span class="font-label-md text-label-md">Skills</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">folder_special</span>
+<span class="font-label-md text-label-md">Projects</span>
+</a>
+</nav>
+<div class="px-md mt-auto">
+<button class="w-full py-sm border border-primary text-primary font-label-md text-label-md rounded-lg hover:bg-surface-container-low transition-colors">Review All</button>
+</div>
+</aside>
+<!-- Main Workspace -->
+<main class="ml-[260px] mt-xxxl h-[calc(100vh-64px)] grid grid-cols-1 lg:grid-cols-12 overflow-hidden bg-background">
+<!-- Left Pane: Editor/Version History -->
+<div class="lg:col-span-7 flex flex-col h-full border-r border-outline-variant overflow-y-auto custom-scrollbar p-lg gap-lg">
+<div class="flex items-center justify-between mb-sm">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">description</span>
+<h1 class="font-headline-page text-headline-page text-on-surface">Senior Product Designer Resume</h1>
+</div>
+<div class="flex items-center gap-xs">
+<span class="text-on-surface-variant font-body-sm text-body-sm">Last saved: 2 mins ago</span>
+</div>
+</div>
+<!-- Experience Section Content -->
+<div class="space-y-lg">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg relative group">
+<div class="absolute top-md right-md flex gap-sm opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary">edit</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-error">delete</button>
+</div>
+<div class="flex items-start gap-md">
+<div class="w-12 h-12 bg-surface-container-high rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">business</span>
+</div>
+<div>
+<h3 class="font-headline-section text-headline-section text-on-surface">Senior Product Designer</h3>
+<p class="font-label-md text-label-md text-on-surface-variant">TechFlow Systems • Jan 2021 — Present</p>
+<p class="mt-sm font-body-sm text-body-sm text-on-surface leading-relaxed">
+                                Lead design systems for a global enterprise platform. Scaled internal UI library to 200+ components, reducing dev handoff time by 40%. Collaborated with PMs to refine the AI-driven workflow engine.
+                            </p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg">
+<div class="flex items-start gap-md">
+<div class="w-12 h-12 bg-surface-container-high rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">business</span>
+</div>
+<div>
+<h3 class="font-headline-section text-headline-section text-on-surface">UI/UX Designer</h3>
+<p class="font-label-md text-label-md text-on-surface-variant">CreativePulse Agency • Jun 2018 — Dec 2020</p>
+<p class="mt-sm font-body-sm text-body-sm text-on-surface leading-relaxed">
+                                Delivered end-to-end designs for mobile and web applications across 12 client projects. Focused on user research and high-fidelity prototyping.
+                            </p>
+</div>
+</div>
+</div>
+<button class="w-full py-md border-2 border-dashed border-outline-variant rounded-xl text-on-surface-variant font-label-md text-label-md hover:border-primary hover:text-primary transition-all flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined">add</span>
+                    Add Work Experience
+                </button>
+</div>
+<!-- Version History Context (Blurred background element) -->
+<div class="mt-auto pt-lg border-t border-outline-variant">
+<h4 class="font-label-caps text-label-caps text-on-surface-variant mb-md">REVISION HISTORY</h4>
+<div class="space-y-sm opacity-50">
+<div class="flex items-center justify-between font-body-sm text-body-sm px-sm">
+<span>V2: Standard Optimization</span>
+<span>10:45 AM</span>
+</div>
+<div class="flex items-center justify-between font-body-sm text-body-sm px-sm bg-surface-container-high rounded py-1">
+<span class="text-primary font-bold">V3: Recent Changes</span>
+<span class="text-primary">Just now</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Pane: Tailor for Job (The Task Focus) -->
+<div class="lg:col-span-5 flex flex-col h-full bg-surface-container-low">
+<!-- Tab Navigation -->
+<div class="flex bg-surface border-b border-outline-variant">
+<button class="flex-1 py-md font-label-md text-label-md text-primary border-b-2 border-primary">
+                    Tailor for Job
+                </button>
+<button class="flex-1 py-md font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high">
+                    AI Analysis
+                </button>
+<button class="flex-1 py-md font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high">
+                    Live Preview
+                </button>
+</div>
+<div class="p-lg flex-1 overflow-y-auto custom-scrollbar">
+<div class="flex items-center justify-between mb-lg">
+<div>
+<h2 class="font-headline-section text-headline-section text-on-surface">Job Optimization</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Align your resume with specific job requirements.</p>
+</div>
+<div class="bg-secondary-container text-on-secondary-container px-md py-sm rounded-full font-label-md text-label-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+                        Match: 82%
+                    </div>
+</div>
+<!-- Input Strategy Selector -->
+<div class="flex gap-sm mb-lg p-xs bg-surface-container-high rounded-lg">
+<button class="flex-1 py-sm px-md rounded font-label-md text-label-md transition-all bg-surface-container-lowest shadow-sm text-primary">
+                        Paste text
+                    </button>
+<button class="flex-1 py-sm px-md rounded font-label-md text-label-md transition-all text-on-surface-variant hover:bg-surface-container-highest">
+                        Job URL
+                    </button>
+</div>
+<!-- Error State UI -->
+<div class="space-y-md">
+<div class="relative">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs">Job Board Link (LinkedIn, Indeed, etc.)</label>
+<div class="relative group">
+<input class="w-full bg-surface-container-lowest border-2 border-error rounded-lg px-md py-lg pr-xxxl font-body-md text-body-md focus:ring-0 focus:outline-none transition-all" type="text" value="https://www.linkedin.com/jobs/view/39201923"/>
+<span class="absolute right-md top-1/2 -translate-y-1/2 material-symbols-outlined text-error">error</span>
+</div>
+<p class="mt-sm font-label-md text-label-md text-error flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">info</span>
+                            Could not fetch this URL. Please paste the job description text directly.
+                        </p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-sm">Paste Job Description</label>
+<textarea class="w-full bg-transparent border-none focus:ring-0 font-body-sm text-body-sm resize-none custom-scrollbar" placeholder="Copy and paste the job duties and requirements here..." rows="8"></textarea>
+</div>
+<button class="w-full bg-primary text-on-primary py-md rounded-lg font-label-md text-label-md hover:opacity-90 shadow-md transition-all flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined">auto_fix_high</span>
+                        Optimize Content
+                    </button>
+</div>
+<!-- AI Insights Placeholder -->
+<div class="mt-xxl border-t border-outline-variant pt-lg">
+<h4 class="font-label-caps text-label-caps text-on-surface-variant mb-md">STRATEGIC ALIGNMENT</h4>
+<div class="space-y-sm">
+<div class="flex items-center gap-md p-sm bg-white rounded-lg border border-outline-variant opacity-70">
+<div class="w-2 h-10 bg-secondary rounded-full"></div>
+<div>
+<p class="font-label-md text-label-md">Keyword Found: "Design Systems"</p>
+<p class="text-[12px] text-on-surface-variant">Strong match in 3 places</p>
+</div>
+</div>
+<div class="flex items-center gap-md p-sm bg-white rounded-lg border border-outline-variant opacity-70">
+<div class="w-2 h-10 bg-tertiary-container rounded-full"></div>
+<div>
+<p class="font-label-md text-label-md">Missing: "Cross-functional Collaboration"</p>
+<p class="text-[12px] text-on-surface-variant">Recommended to add to TechFlow role</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Success Modal (Hidden by default) -->
+<div class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[100] hidden flex items-center justify-center" id="save-overlay">
+<div class="bg-surface p-xl rounded-xl max-w-md w-full shadow-2xl border border-outline-variant text-center">
+<div class="w-16 h-16 bg-secondary-container text-secondary mx-auto rounded-full flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-[32px]">check_circle</span>
+</div>
+<h3 class="font-headline-page text-headline-page text-on-surface mb-sm">Resume Optimized!</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-lg">We've updated your bullet points to match the job requirements while keeping your original tone.</p>
+<button class="w-full bg-primary text-on-primary py-sm rounded-lg font-label-md text-label-md" onclick="closeModal()">View Changes</button>
+</div>
+</div>
+<script>
+        function closeModal() {
+            document.getElementById('save-overlay').classList.add('hidden');
+        }
+
+        // Lightweight atmospheric interaction: Shake effect on error if "Job URL" is clicked again
+        const urlButton = document.querySelector('button:contains("Job URL")');
+        // Simple selector logic for the demo
+        document.querySelectorAll('button').forEach(btn => {
+            if (btn.innerText.includes('Job URL')) {
+                btn.onclick = () => {
+                    const inputWrapper = document.querySelector('.group');
+                    inputWrapper.classList.add('animate-shake');
+                    setTimeout(() => inputWrapper.classList.remove('animate-shake'), 500);
+                };
+            }
+        });
+    </script>
+<style>
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-4px); }
+            75% { transform: translateX(4px); }
+        }
+        .animate-shake {
+            animation: shake 0.2s cubic-bezier(.36,.07,.19,.97) both;
+            animation-iteration-count: 2;
+        }
+    </style>
+</body></html>

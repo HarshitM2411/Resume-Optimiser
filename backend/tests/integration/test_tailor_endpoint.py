@@ -3,10 +3,70 @@ from unittest.mock import AsyncMock, patch
 import pytest
 from httpx import ASGITransport, AsyncClient
 
+from app.core.exceptions import URLFetchError
 from app.main import app
 from app.models.domain.diff import PendingEditResponse
 from app.models.domain.jd import JDAnalysisSchema
 from app.models.domain.resume import ResumeSchema
+
+
+@pytest.mark.asyncio
+async def test_analyze_jd_endpoint_requires_jd_source() -> None:
+    transport = ASGITransport(app=app)
+
+    async with AsyncClient(
+        transport=transport,
+        base_url="http://test",
+        headers={"Host": "localhost"},
+    ) as client:
+        response = await client.post("/api/v1/analyze-jd", json={})
+
+    assert response.status_code == 422
+
+
+@pytest.mark.asyncio
+async def test_analyze_jd_endpoint_with_jd_text(sample_jd: JDAnalysisSchema) -> None:
+    transport = ASGITransport(app=app)
+
+    with patch("app.api.v1.routers.tailor.JDAnalyzer") as analyzer_cls:
+        analyzer_cls.return_value.analyze = AsyncMock(return_value=sample_jd)
+
+        async with AsyncClient(
+            transport=transport,
+            base_url="http://test",
+            headers={"Host": "localhost"},
+        ) as client:
+            response = await client.post(
+                "/api/v1/analyze-jd",
+                json={"jd_text": "Hiring Senior Backend Engineer with Python and FastAPI."},
+            )
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["role_title"] == sample_jd.role_title
+    assert body["must_have_skills"] == sample_jd.must_have_skills
+
+
+@pytest.mark.asyncio
+async def test_analyze_jd_endpoint_url_fetch_error() -> None:
+    transport = ASGITransport(app=app)
+
+    with patch(
+        "app.api.v1.routers.tailor.fetch_jd_url",
+        AsyncMock(side_effect=URLFetchError()),
+    ):
+        async with AsyncClient(
+            transport=transport,
+            base_url="http://test",
+            headers={"Host": "localhost"},
+        ) as client:
+            response = await client.post(
+                "/api/v1/analyze-jd",
+                json={"jd_url": "https://example.com/jobs/123"},
+            )
+
+    assert response.status_code == 422
+    assert "URL" in response.json()["detail"] or "url" in response.json()["detail"].lower()
 
 
 @pytest.mark.asyncio

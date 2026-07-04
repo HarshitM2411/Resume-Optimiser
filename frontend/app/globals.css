@@ -3,5 +3,59 @@
 @tailwind utilities;
 
 body {
-  @apply bg-slate-50 text-slate-900 antialiased;
+  @apply bg-background text-on-background antialiased;
+}
+
+@layer utilities {
+  .shimmer-bg {
+    background: linear-gradient(90deg, #f0ecf9 25%, #e4e1ee 50%, #f0ecf9 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite linear;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #e5e7eb;
+    border-radius: 10px;
+  }
+
+  .resume-card:hover .chevron-icon {
+    opacity: 1;
+  }
+
+  .diff-added {
+    background-color: rgba(0, 106, 97, 0.15);
+    border-bottom: 2px solid #006a61;
+  }
+
+  .diff-removed {
+    background-color: rgba(186, 26, 26, 0.1);
+    text-decoration: line-through;
+    color: #ba1a1a;
+  }
+
+  .edit-highlight {
+    border-left: 4px solid #f59e0b;
+    background-color: #fffbeb;
+  }
+
+  .mini-diff-added {
+    background-color: #ecfdf5;
+    color: #065f46;
+    border-left: 2px solid #10b981;
+  }
+
+  .mini-diff-removed {
+    background-color: #fef2f2;
+    color: #991b1b;
+    text-decoration: line-through;
+    border-left: 2px solid #ef4444;
+  }
 }

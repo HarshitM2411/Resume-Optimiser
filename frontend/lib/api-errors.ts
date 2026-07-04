@@ -1,13 +1,23 @@
 import { APIError } from "@/types/resume";
 
+function getDetailMessage(body: unknown): string | null {
+  if (typeof body === "object" && body !== null && "detail" in body) {
+    const detail = (body as { detail: unknown }).detail;
+    if (typeof detail === "string") {
+      return detail;
+    }
+  }
+  return null;
+}
+
 export function getErrorMessage(error: unknown): string {
   if (error instanceof APIError) {
-    const body = error.body;
-    if (typeof body === "object" && body !== null && "detail" in body) {
-      const detail = (body as { detail: unknown }).detail;
-      if (typeof detail === "string") {
-        return detail;
-      }
+    const detail = getDetailMessage(error.body);
+    if (detail) {
+      return detail;
+    }
+    if (error.status === 404) {
+      return "API route not found. Restart the backend server and try again.";
     }
     if (error.status === 413) return "File exceeds 5MB limit.";
     if (error.status === 415) return "Unsupported file type.";
@@ -25,4 +35,13 @@ export function getErrorMessage(error: unknown): string {
   }
 
   return "An unexpected error occurred.";
+}
+
+export function isUrlFetchError(error: unknown): boolean {
+  if (!(error instanceof APIError) || error.status !== 422) {
+    return false;
+  }
+
+  const detail = getDetailMessage(error.body)?.toLowerCase() ?? "";
+  return detail.includes("url") || detail.includes("fetch");
 }

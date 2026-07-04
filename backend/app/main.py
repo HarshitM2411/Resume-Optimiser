@@ -7,6 +7,7 @@ from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import JSONResponse
 
 from app.api.v1.routers.edit import router as edit_router
+from app.api.v1.routers.format import router as format_router
 from app.api.v1.routers.parse import router as parse_router
 from app.api.v1.routers.pdf import router as pdf_router
 from app.api.v1.routers.tailor import router as tailor_router
@@ -65,6 +66,7 @@ def create_app() -> FastAPI:
         return {"status": "ok"}
 
     app.include_router(parse_router, prefix="/api/v1")
+    app.include_router(format_router, prefix="/api/v1")
     app.include_router(tailor_router, prefix="/api/v1")
     app.include_router(edit_router, prefix="/api/v1")
     app.include_router(pdf_router, prefix="/api/v1")

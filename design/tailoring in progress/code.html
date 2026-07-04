@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OptiResume | Tailoring your resume...</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary": "#ffffff",
+                    "secondary": "#006a61",
+                    "on-primary-fixed": "#0f0069",
+                    "secondary-container": "#86f2e4",
+                    "on-secondary-container": "#006f66",
+                    "primary-fixed-dim": "#c3c0ff",
+                    "inverse-primary": "#c3c0ff",
+                    "on-secondary-fixed-variant": "#005049",
+                    "on-tertiary-fixed": "#351000",
+                    "primary-container": "#4f46e5",
+                    "surface-container-low": "#f5f2ff",
+                    "surface": "#fcf8ff",
+                    "tertiary-fixed-dim": "#ffb695",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-container": "#dad7ff",
+                    "on-tertiary-fixed-variant": "#7b2f00",
+                    "inverse-surface": "#302f39",
+                    "secondary-fixed": "#89f5e7",
+                    "tertiary-fixed": "#ffdbcc",
+                    "surface-variant": "#e4e1ee",
+                    "surface-bright": "#fcf8ff",
+                    "primary": "#3525cd",
+                    "on-primary": "#ffffff",
+                    "surface-container-high": "#eae6f4",
+                    "on-surface-variant": "#464555",
+                    "secondary-fixed-dim": "#6bd8cb",
+                    "error": "#ba1a1a",
+                    "on-error": "#ffffff",
+                    "on-tertiary-container": "#ffd2be",
+                    "on-primary-fixed-variant": "#3323cc",
+                    "inverse-on-surface": "#f3effc",
+                    "tertiary-container": "#a44100",
+                    "on-secondary-fixed": "#00201d",
+                    "tertiary": "#7e3000",
+                    "surface-dim": "#dcd8e5",
+                    "on-error-container": "#93000a",
+                    "surface-container": "#f0ecf9",
+                    "on-background": "#1b1b24",
+                    "error-container": "#ffdad6",
+                    "surface-tint": "#4d44e3",
+                    "surface-container-highest": "#e4e1ee",
+                    "outline-variant": "#c7c4d8",
+                    "on-surface": "#1b1b24",
+                    "outline": "#777587",
+                    "primary-fixed": "#e2dfff",
+                    "background": "#fcf8ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xxl": "48px",
+                    "sm": "8px",
+                    "md": "16px",
+                    "lg": "24px",
+                    "xxxl": "64px",
+                    "xl": "32px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Inter"],
+                    "headline-section": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-page": ["Inter"]
+            },
+            "fontSize": {
+                    "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                    "headline-section": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "headline-page": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FAFAFA;
+        }
+        .loading-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: .5; transform: scale(1.1); }
+        }
+        .spinner-ring {
+            border: 2px solid rgba(53, 37, 205, 0.1);
+            border-left-color: #3525cd;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .step-transition {
+            transition: all 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="overflow-hidden">
+<!-- TopNavBar (Shared Component Identity) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-lg h-xxxl max-w-[1280px] left-1/2 -translate-x-1/2 bg-transparent border-b border-outline-variant">
+<div class="flex items-center gap-sm">
+<span class="text-headline-page font-headline-page font-bold text-primary">OptiResume</span>
+</div>
+<div class="hidden md:flex items-center gap-xl">
+<nav class="flex gap-lg">
+<span class="text-on-surface-variant font-label-md text-label-md cursor-not-allowed opacity-50">Dashboard</span>
+<span class="text-on-surface-variant font-label-md text-label-md cursor-not-allowed opacity-50">My Resumes</span>
+<span class="text-on-surface-variant font-label-md text-label-md cursor-not-allowed opacity-50">Job Matches</span>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant opacity-50">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant opacity-50">settings</span>
+<div class="w-xxl h-xxl rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional user profile avatar in a minimalist circle, styled with soft studio lighting against a neutral background, maintaining a high-end corporate SaaS aesthetic with clean lines and monochromatic tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuChOo2yaVBpnFWQkT2pplc2ige-FObkwjOvjq57RzqT8crnj7mCO6SyfQlt5SavgvJE8Ng0HKU0VvWKrcJgZ6ajlBg8tYiXE0xhQPNOED-8Qh_0AMVt38UT9j_28yZgyKcYoS7FwYStFZouLZfaAY7kh2D30TTNDaaLWkn2INUvgTHHku6vY2bCcbOb6hRt4PxmZ3c1yDS1NAVXrkpDiVw1kGkWjnvd5GTfDbc1yo-E71sNEpAQjslrs-bof8u3FAlZteJbbkH6BsU"/>
+</div>
+</div>
+</header>
+<!-- Full Screen Loading Overlay Content -->
+<main class="relative h-screen w-full flex flex-col items-center justify-center px-md">
+<!-- Subtle Ambient Background Pattern -->
+<div class="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(#3525cd 1px, transparent 1px); background-size: 32px 32px;"></div>
+<!-- Central Content Container -->
+<div class="relative z-10 max-w-lg w-full text-center space-y-xl">
+<!-- Animated Visual Indicator -->
+<div class="flex justify-center mb-xl">
+<div class="relative w-24 h-24">
+<div class="absolute inset-0 bg-primary/10 rounded-2xl rotate-6 animate-pulse"></div>
+<div class="absolute inset-0 bg-primary/5 rounded-2xl -rotate-6 animate-pulse" style="animation-delay: 1s"></div>
+<div class="relative flex items-center justify-center w-full h-full bg-surface border border-outline-variant rounded-2xl shadow-sm">
+<span class="material-symbols-outlined text-primary text-[40px]" style="font-variation-settings: 'FILL' 1;">auto_fix_high</span>
+</div>
+</div>
+</div>
+<!-- Headline -->
+<div class="space-y-sm">
+<h1 class="font-headline-page text-headline-page text-on-background font-bold tracking-tight">Tailoring your resume…</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-sm mx-auto">Our AI is meticulously aligning your skills with the job requirements to maximize your match score.</p>
+</div>
+<!-- Progress Steps List -->
+<div class="bg-white border border-outline-variant rounded-xl p-lg shadow-sm text-left space-y-md max-w-md mx-auto">
+<!-- Step 1: Completed -->
+<div class="flex items-center gap-md step-transition">
+<div class="flex-shrink-0 w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container text-sm font-bold">check</span>
+</div>
+<div class="flex-1">
+<p class="font-label-md text-label-md text-on-surface">Analyzing job description</p>
+<p class="font-body-sm text-body-sm text-secondary font-medium">Completed</p>
+</div>
+</div>
+<!-- Divider Line -->
+<div class="ml-4 h-6 border-l-2 border-outline-variant border-dashed"></div>
+<!-- Step 2: Active -->
+<div class="flex items-center gap-md step-transition">
+<div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center">
+<div class="spinner-ring"></div>
+</div>
+<div class="flex-1">
+<p class="font-label-md text-label-md text-on-surface">Comparing against your experience</p>
+<p class="font-body-sm text-body-sm text-primary font-medium flex items-center gap-xs">
+<span class="loading-pulse">In progress</span>
+</p>
+</div>
+</div>
+<!-- Divider Line -->
+<div class="ml-4 h-6 border-l-2 border-outline-variant border-dashed"></div>
+<!-- Step 3: Pending -->
+<div class="flex items-center gap-md opacity-40 step-transition">
+<div class="flex-shrink-0 w-8 h-8 rounded-full border-2 border-outline flex items-center justify-center">
+<span class="w-2 h-2 bg-outline rounded-full"></span>
+</div>
+<div class="flex-1">
+<p class="font-label-md text-label-md text-on-surface">Generating tailored version</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Pending</p>
+</div>
+</div>
+</div>
+<!-- Footnote / Tip -->
+<div class="pt-xl border-t border-outline-variant inline-block w-full">
+<p class="font-body-sm text-body-sm text-on-surface-variant italic">
+                    "Tip: Highlighting quantifiable achievements increases recruiter engagement by 40%."
+                </p>
+</div>
+</div>
+</main>
+<!-- Background Decorative Elements -->
+<div class="fixed bottom-0 left-0 w-full overflow-hidden pointer-events-none h-xxxl z-0">
+<div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[1280px] h-[1px] bg-gradient-to-r from-transparent via-outline-variant to-transparent"></div>
+</div>
+<!-- Interaction Script for slight movement/interactivity -->
+<script>
+        document.addEventListener('mousemove', (e) => {
+            const moveX = (e.clientX - window.innerWidth / 2) / 100;
+            const moveY = (e.clientY - window.innerHeight / 2) / 100;
+            const elements = document.querySelectorAll('.step-transition');
+            elements.forEach((el, index) => {
+                const depth = (index + 1) * 0.5;
+                el.style.transform = `translate(${moveX * depth}px, ${moveY * depth}px)`;
+            });
+        });
+
+        // Simulate step transition after 5 seconds
+        setTimeout(() => {
+            // This is just a visual demonstration of how the state would change
+            console.log("Stepping through process...");
+        }, 5000);
+    </script>
+</body></html>

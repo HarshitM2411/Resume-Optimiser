@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Job Description Analysis - OptiResume</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e4e1ee;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c7c4d8;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#dad7ff",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb695",
+                        "surface-container-low": "#f5f2ff",
+                        "outline-variant": "#c7c4d8",
+                        "on-tertiary-fixed": "#351000",
+                        "on-tertiary-container": "#ffd2be",
+                        "on-surface": "#1b1b24",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#fcf8ff",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#dcd8e5",
+                        "on-secondary-container": "#006f66",
+                        "inverse-on-surface": "#f3effc",
+                        "primary-container": "#4f46e5",
+                        "inverse-primary": "#c3c0ff",
+                        "secondary-fixed": "#89f5e7",
+                        "surface-tint": "#4d44e3",
+                        "surface-container-highest": "#e4e1ee",
+                        "surface-container": "#f0ecf9",
+                        "primary-fixed": "#e2dfff",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "on-secondary-fixed-variant": "#005049",
+                        "on-secondary-fixed": "#00201d",
+                        "background": "#fcf8ff",
+                        "surface-variant": "#e4e1ee",
+                        "tertiary-fixed": "#ffdbcc",
+                        "on-primary-fixed": "#0f0069",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "primary": "#3525cd",
+                        "surface": "#fcf8ff",
+                        "inverse-surface": "#302f39",
+                        "tertiary-container": "#a44100",
+                        "outline": "#777587",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "on-background": "#1b1b24",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#006a61",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#7e3000",
+                        "secondary-container": "#86f2e4",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#eae6f4",
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#464555"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xxl": "48px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "xxxl": "64px",
+                        "xl": "32px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "headline-section": ["Inter"],
+                        "headline-page": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "display-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "headline-section": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "headline-page": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-[#FAFAFA] font-body-md text-on-surface antialiased">
+<!-- Top Navigation Bar (Shared Component Reference) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-lg h-xxxl max-w-[1280px] left-1/2 -translate-x-1/2 bg-surface border-b border-outline-variant">
+<div class="flex items-center gap-md">
+<span class="text-headline-page font-headline-page font-bold text-primary">OptiResume</span>
+<nav class="hidden md:flex items-center gap-lg ml-xl">
+<a class="font-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="font-label-md text-primary border-b-2 border-primary pb-1" href="#">My Resumes</a>
+<a class="font-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Job Matches</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">settings</span>
+<div class="w-8 h-8 rounded-full bg-surface-container overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a software engineer in a bright, modern studio setting with a clean, minimalist background and soft, even lighting that reflects a high-end corporate tech aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuASoZJgpwRlSijKbicoPYVARtBwao9uayz9-Tzb9Msue8GtZ11l9YlvBZFrKbSDSwIY2g-gRPuQSLWxV85nBWZnO3Xne1MAZ2d1CtMShDqyDjny-Rcc9dOgYz7QXudKMTdLcYtjHlknYB9VkLAq6_5yuKcnlLtC0rfA0Y6QtBQyBEGjeSmxRobyXGKwjF9ucEBqg4Z-sXSbT8-OkFqnFJZbnc101pT8JpyQ8Vb9oblp1toK6z2VaVIbQoj_SSAszmWL9W9ko-vd9BM"/>
+</div>
+</div>
+</header>
+<main class="pt-xxxl pb-xxl flex max-w-[1280px] mx-auto min-h-screen">
+<!-- Side Navigation (Shared Component Reference) -->
+<aside class="fixed left-[calc(50%-640px)] top-xxxl h-[calc(100vh-64px)] w-xxxl flex flex-col py-md border-r border-outline-variant bg-surface hidden xl:flex">
+<div class="px-sm mb-lg">
+<h3 class="font-headline-section text-on-surface px-sm mb-xs">Sections</h3>
+<p class="font-body-sm text-on-surface-variant px-sm">5 changes pending</p>
+</div>
+<nav class="flex flex-col gap-xs">
+<div class="flex flex-col items-center py-sm cursor-pointer hover:bg-surface-container-high transition-all text-on-surface-variant">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-label-md text-[10px]">Contact</span>
+</div>
+<div class="flex flex-col items-center py-sm cursor-pointer hover:bg-surface-container-high transition-all text-on-surface-variant">
+<span class="material-symbols-outlined mb-1">work</span>
+<span class="font-label-md text-[10px]">Experience</span>
+</div>
+<div class="flex flex-col items-center py-sm cursor-pointer hover:bg-surface-container-high transition-all text-on-surface-variant">
+<span class="material-symbols-outlined mb-1">school</span>
+<span class="font-label-md text-[10px]">Education</span>
+</div>
+<div class="flex flex-col items-center py-sm cursor-pointer text-primary font-bold border-r-2 border-primary bg-surface-container-low">
+<span class="material-symbols-outlined mb-1">psychology</span>
+<span class="font-label-md text-[10px]">Skills</span>
+</div>
+<div class="flex flex-col items-center py-sm cursor-pointer hover:bg-surface-container-high transition-all text-on-surface-variant">
+<span class="material-symbols-outlined mb-1">folder_special</span>
+<span class="font-label-md text-[10px]">Projects</span>
+</div>
+</nav>
+<div class="mt-auto px-sm">
+<button class="w-full py-sm rounded-lg border border-primary text-primary font-label-md hover:bg-primary-fixed transition-colors">Review All</button>
+</div>
+</aside>
+<!-- Focused Analysis Panel -->
+<section class="flex-1 ml-0 xl:ml-xxxl px-md md:px-xxl py-xl">
+<div class="max-w-4xl mx-auto">
+<!-- Back Action -->
+<button class="flex items-center gap-xs text-on-surface-variant hover:text-primary mb-md transition-colors group">
+<span class="material-symbols-outlined text-sm transition-transform group-hover:-translate-x-1">arrow_back</span>
+<span class="font-label-md">Back to Job List</span>
+</button>
+<!-- Analysis Main Card -->
+<div class="bg-white rounded-xl border border-[#E5E7EB] shadow-sm overflow-hidden flex flex-col md:flex-row">
+<!-- Left Column: Summary & Tags -->
+<div class="w-full md:w-1/3 bg-surface-container-low/50 p-lg border-b md:border-b-0 md:border-r border-[#E5E7EB]">
+<h1 class="font-headline-page text-on-surface mb-md">Job Description Analysis</h1>
+<div class="mb-xl">
+<div class="flex items-center gap-md mb-xs">
+<div class="w-12 h-12 bg-white rounded-lg border border-outline-variant flex items-center justify-center p-sm">
+<img class="w-full h-full object-contain" data-alt="A clean, minimalist monochrome vector logo for a high-end fintech company like Stripe, presented on a stark white square background with soft drop shadow." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_nIRmP9YPhiADSCXt9JWHMiYxyk-9IeiolXehuXQaWyM2ifFdr7knaJs4QAoWub9vYZM6vQ8-4yculJ3cn_BZg_VRfwHMEqmotqwS6HF2VX5tqxrSqOSQdiEz77bDDmxe84wBwXjsvf3cjDtxQ-NaGiTrleUYxIM1feURchGp09RwNxnVAmzg_4oU-lalVe_MFWWVrBJIdJZ_l3jThtQXTTNNEM-q8gBChgRhLUII8tO8cOkcJ5lvwQYjLbC2xiZX5aJOLWqA1Ac"/>
+</div>
+<div>
+<h2 class="font-headline-section text-on-surface">Senior Backend Engineer</h2>
+<p class="font-body-sm text-on-surface-variant">Stripe</p>
+</div>
+</div>
+</div>
+<div class="space-y-lg">
+<div>
+<h3 class="font-label-caps text-on-surface-variant mb-sm">Seniority &amp; Tone</h3>
+<div class="flex flex-wrap gap-xs">
+<span class="px-sm py-1 bg-primary/10 text-primary rounded-full font-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+                                        Senior
+                                    </span>
+<span class="px-sm py-1 bg-secondary/10 text-secondary rounded-full font-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">terminal</span>
+                                        Technical tone
+                                    </span>
+</div>
+</div>
+<div>
+<h3 class="font-label-caps text-on-surface-variant mb-sm">Match Potential</h3>
+<div class="flex items-end gap-xs">
+<span class="text-display-lg font-bold text-secondary leading-none">84%</span>
+<span class="font-label-md text-on-surface-variant mb-1">Estimated</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full mt-sm overflow-hidden">
+<div class="h-full bg-secondary w-[84%] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Skills & Details -->
+<div class="flex-1 p-lg">
+<!-- Must-have Skills -->
+<div class="mb-xl">
+<div class="flex items-center gap-xs mb-md">
+<span class="material-symbols-outlined text-[#B45309]">verified</span>
+<h3 class="font-headline-section">Must-have Skills</h3>
+<span class="ml-auto px-xs py-0.5 bg-error-container text-on-error-container rounded text-[10px] font-bold uppercase tracking-wider">High Importance</span>
+</div>
+<div class="flex flex-wrap gap-sm">
+<span class="px-md py-sm bg-white border border-[#B45309]/30 text-[#B45309] rounded-lg font-label-md shadow-sm">Python</span>
+<span class="px-md py-sm bg-white border border-[#B45309]/30 text-[#B45309] rounded-lg font-label-md shadow-sm">PostgreSQL</span>
+<span class="px-md py-sm bg-white border border-[#B45309]/30 text-[#B45309] rounded-lg font-label-md shadow-sm">Distributed Systems</span>
+<span class="px-md py-sm bg-white border border-[#B45309]/30 text-[#B45309] rounded-lg font-label-md shadow-sm">Kubernetes</span>
+<span class="px-md py-sm bg-white border border-[#B45309]/30 text-[#B45309] rounded-lg font-label-md shadow-sm">gRPC</span>
+</div>
+</div>
+<!-- Nice-to-have Skills -->
+<div class="mb-xl">
+<h3 class="font-label-caps text-on-surface-variant mb-md">Secondary Skills</h3>
+<div class="flex flex-wrap gap-sm">
+<span class="px-md py-sm bg-surface-container-high text-on-surface-variant rounded-lg font-label-md">Go</span>
+<span class="px-md py-sm bg-surface-container-high text-on-surface-variant rounded-lg font-label-md">Redis</span>
+<span class="px-md py-sm bg-surface-container-high text-on-surface-variant rounded-lg font-label-md">AWS</span>
+<span class="px-md py-sm bg-surface-container-high text-on-surface-variant rounded-lg font-label-md">CI/CD</span>
+</div>
+</div>
+<!-- Keywords -->
+<div class="mb-xl">
+<h3 class="font-label-caps text-on-surface-variant mb-md">Strategic Keywords</h3>
+<div class="flex flex-wrap gap-sm">
+<span class="px-sm py-1 border border-primary text-primary rounded-md font-label-md">scalability</span>
+<span class="px-sm py-1 border border-primary text-primary rounded-md font-label-md">microservices</span>
+<span class="px-sm py-1 border border-primary text-primary rounded-md font-label-md">API design</span>
+<span class="px-sm py-1 border border-primary text-primary rounded-md font-label-md">observability</span>
+<span class="px-sm py-1 border border-primary text-primary rounded-md font-label-md">on-call</span>
+</div>
+</div>
+<!-- Key Responsibilities -->
+<div class="mb-xl">
+<h3 class="font-label-caps text-on-surface-variant mb-md">Core Responsibilities</h3>
+<ul class="space-y-sm">
+<li class="flex gap-md items-start p-sm rounded-lg hover:bg-surface-container-low transition-colors group">
+<span class="material-symbols-outlined text-secondary mt-0.5">check_circle</span>
+<p class="font-body-md text-on-surface-variant group-hover:text-on-surface">Design and build scalable backend services for global payments infrastructure.</p>
+</li>
+<li class="flex gap-md items-start p-sm rounded-lg hover:bg-surface-container-low transition-colors group">
+<span class="material-symbols-outlined text-secondary mt-0.5">check_circle</span>
+<p class="font-body-md text-on-surface-variant group-hover:text-on-surface">Collaborate with product on API contracts to ensure developer-first experiences.</p>
+</li>
+<li class="flex gap-md items-start p-sm rounded-lg hover:bg-surface-container-low transition-colors group">
+<span class="material-symbols-outlined text-secondary mt-0.5">check_circle</span>
+<p class="font-body-md text-on-surface-variant group-hover:text-on-surface">Mentor junior engineers and foster a culture of technical excellence.</p>
+</li>
+<li class="flex gap-md items-start p-sm rounded-lg hover:bg-surface-container-low transition-colors group">
+<span class="material-symbols-outlined text-secondary mt-0.5">check_circle</span>
+<p class="font-body-md text-on-surface-variant group-hover:text-on-surface">Optimise system performance and reliability across distributed clusters.</p>
+</li>
+</ul>
+</div>
+<!-- CTA Section -->
+<div class="mt-xxl border-t border-outline-variant pt-lg">
+<button class="w-full py-md bg-primary hover:bg-on-primary-fixed-variant text-white font-bold rounded-lg shadow-lg shadow-primary/20 transition-all active:scale-[0.98] flex items-center justify-center gap-md">
+<span class="material-symbols-outlined">auto_awesome</span>
+                                Tailor Resume for This Role
+                            </button>
+<p class="text-center font-body-sm text-on-surface-variant mt-md flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-sm">info</span>
+                                Our AI will adjust your bullet points to emphasize these skills.
+                            </p>
+</div>
+</div>
+</div>
+<!-- Footer Section (Asymmetric Insight) -->
+<div class="mt-lg grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="p-lg rounded-xl border border-[#E5E7EB] bg-white flex gap-md items-start">
+<div class="p-sm bg-tertiary-container/10 text-tertiary rounded-lg">
+<span class="material-symbols-outlined" data-weight="fill">lightbulb</span>
+</div>
+<div>
+<h4 class="font-label-md text-on-surface mb-xs">Optimization Tip</h4>
+<p class="font-body-sm text-on-surface-variant">Mention specific "gRPC" implementation details in your latest role. Stripe's parser prioritizes concrete tooling usage over generic descriptions.</p>
+</div>
+</div>
+<div class="p-lg rounded-xl border border-[#E5E7EB] bg-white flex gap-md items-start">
+<div class="p-sm bg-secondary-container/10 text-secondary rounded-lg">
+<span class="material-symbols-outlined" data-weight="fill">verified_user</span>
+</div>
+<div>
+<h4 class="font-label-md text-on-surface mb-xs">Tone Verification</h4>
+<p class="font-body-sm text-on-surface-variant">The "Technical" tone matches your current Profile settings. No manual tone adjustment needed for the cover letter generation.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<script>
+        // Simple micro-interaction for chips
+        document.querySelectorAll('span.cursor-pointer').forEach(chip => {
+            chip.addEventListener('click', () => {
+                chip.classList.toggle('bg-primary');
+                chip.classList.toggle('text-white');
+            });
+        });
+
+        // Dashboard active link simulator
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                navLinks.forEach(l => {
+                    l.classList.remove('text-primary', 'border-b-2', 'border-primary', 'pb-1');
+                    l.classList.add('text-on-surface-variant');
+                });
+                link.classList.remove('text-on-surface-variant');
+                link.classList.add('text-primary', 'border-b-2', 'border-primary', 'pb-1');
+            });
+        });
+    </script>
+</body></html>

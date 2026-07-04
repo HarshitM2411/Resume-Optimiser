@@ -1,12 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { AlertCircle, FileUp, PlusCircle } from "lucide-react";
 import { useRef, useState, type DragEvent } from "react";
-
-import { useResume } from "@/app/context/ResumeContext";
-import { useToast } from "@/app/context/ToastContext";
-import { parseResume } from "@/lib/api";
-import { getErrorMessage } from "@/lib/api-errors";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 const ACCEPTED_TYPES = [
@@ -24,91 +19,133 @@ function isAcceptedFile(file: File): boolean {
   return ACCEPTED_EXTENSIONS.some((ext) => lowerName.endsWith(ext));
 }
 
-export function UploadZone() {
-  const router = useRouter();
-  const { setResumeJson } = useResume();
-  const { showToast } = useToast();
+export type UploadZoneProps = {
+  error?: string | null;
+  disabled?: boolean;
+  onFileSelected: (file: File) => void;
+  onValidationError?: (message: string) => void;
+};
+
+export function UploadZone({
+  error,
+  disabled = false,
+  onFileSelected,
+  onValidationError,
+}: UploadZoneProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isDragging, setIsDragging] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
-  const handleFile = async (file: File) => {
+  const validateAndSelect = (file: File) => {
     if (!isAcceptedFile(file)) {
-      showToast("Unsupported file type. Upload PDF, DOCX, or TXT.", "error");
+      onValidationError?.(
+        "Unsupported file type. Upload PDF, DOCX, or TXT.",
+      );
       return;
     }
 
     if (file.size > MAX_FILE_SIZE) {
-      showToast("File exceeds 5MB limit.", "error");
+      onValidationError?.("File exceeds 5MB limit.");
       return;
     }
 
-    setIsLoading(true);
-    const controller = new AbortController();
-    const timeoutId = window.setTimeout(() => controller.abort(), 60000);
-
-    try {
-      const response = await parseResume(file, controller.signal);
-      setResumeJson(response.resume_json);
-      showToast("Resume parsed successfully.", "success");
-      router.push("/editor");
-    } catch (error) {
-      showToast(getErrorMessage(error), "error");
-    } finally {
-      window.clearTimeout(timeoutId);
-      setIsLoading(false);
-    }
+    onFileSelected(file);
   };
 
-  const onDrop = async (event: DragEvent<HTMLDivElement>) => {
+  const onDrop = (event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     setIsDragging(false);
+    if (disabled) return;
     const file = event.dataTransfer.files[0];
     if (file) {
-      await handleFile(file);
+      validateAndSelect(file);
     }
   };
 
   return (
-    <div className="w-full max-w-xl">
+    <div className="mx-auto w-full max-w-2xl space-y-lg">
+      {error ? (
+        <div className="flex items-center gap-sm rounded border border-error/20 bg-error-container p-md text-body-sm text-on-error-container">
+          <AlertCircle className="size-5 shrink-0" strokeWidth={2} />
+          <span>{error}</span>
+        </div>
+      ) : null}
+
       <div
+        role="button"
+        tabIndex={disabled ? -1 : 0}
+        aria-disabled={disabled}
         onDragOver={(event) => {
           event.preventDefault();
-          setIsDragging(true);
+          if (!disabled) setIsDragging(true);
         }}
         onDragLeave={() => setIsDragging(false)}
         onDrop={onDrop}
-        onClick={() => inputRef.current?.click()}
-        className={`cursor-pointer rounded-xl border-2 border-dashed px-8 py-12 text-center transition ${
+        onClick={() => {
+          if (!disabled) inputRef.current?.click();
+        }}
+        onKeyDown={(event) => {
+          if (disabled) return;
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            inputRef.current?.click();
+          }
+        }}
+        className={`relative cursor-pointer rounded-md border bg-white p-xxl shadow-soft transition-all duration-200 ${
           isDragging
-            ? "border-blue-500 bg-blue-50"
-            : "border-slate-300 bg-white hover:border-slate-400"
-        }`}
+            ? "scale-[1.02] border-2 border-dashed border-primary bg-primary/5"
+            : "border-border hover:border-primary-container"
+        } ${disabled ? "pointer-events-none opacity-60" : ""}`}
       >
         <input
           ref={inputRef}
           type="file"
           accept=".pdf,.docx,.txt"
-          className="hidden"
-          disabled={isLoading}
+          className="sr-only"
+          disabled={disabled}
           onChange={(event) => {
             const file = event.target.files?.[0];
             if (file) {
-              void handleFile(file);
+              validateAndSelect(file);
             }
+            event.target.value = "";
           }}
         />
-        {isLoading ? (
-          <p className="text-sm text-slate-600">Parsing resume...</p>
+
+        {isDragging ? (
+          <div className="flex flex-col items-center gap-md py-md">
+            <PlusCircle
+              className="size-8 animate-bounce text-primary"
+              strokeWidth={2}
+            />
+            <p className="text-headline-section text-primary">
+              Ready to drop your file
+            </p>
+          </div>
         ) : (
-          <>
-            <p className="font-medium text-slate-800">
-              Drag and drop your resume here
-            </p>
-            <p className="mt-2 text-sm text-slate-500">
-              or click to browse — PDF, DOCX, or TXT up to 5MB
-            </p>
-          </>
+          <div className="flex flex-col items-center gap-md py-md">
+            <div className="flex size-16 items-center justify-center rounded-full bg-surface-container text-primary-container">
+              <FileUp className="size-8" strokeWidth={2} />
+            </div>
+            <div className="space-y-xs text-center">
+              <p className="text-headline-section text-on-background">
+                Drop your resume here or click to browse
+              </p>
+              <p className="text-body-sm text-on-surface-variant">
+                Max 5MB · Text-based PDFs only
+              </p>
+            </div>
+            <div className="mt-sm flex gap-sm">
+              <span className="rounded-full bg-primary-fixed px-md py-1 text-label-caps text-on-primary-fixed-variant">
+                PDF
+              </span>
+              <span className="rounded-full bg-surface-container-high px-md py-1 text-label-caps text-on-surface-variant">
+                DOCX
+              </span>
+              <span className="rounded-full bg-surface-container-high px-md py-1 text-label-caps text-on-surface-variant">
+                TXT
+              </span>
+            </div>
+          </div>
         )}
       </div>
     </div>
