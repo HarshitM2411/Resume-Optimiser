@@ -1,0 +1,15 @@
+.env
+.venv
+backend/tools/
+__pycache__/
+tmp_pdf_*.json
+tmp_pdf_*.bin
+*.py[cod]
+.pytest_cache/
+node_modules/
+.next/
+dist/
+build/
+*.egg-info/
+.DS_Store
+infra/nginx/certs/*.pem

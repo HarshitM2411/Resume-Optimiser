@@ -1,0 +1,49 @@
+services:
+  backend:
+    build:
+      context: ../backend
+    environment:
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      CORS_ORIGINS: http://localhost:3000,https://localhost
+      ALLOWED_HOSTS: localhost,127.0.0.1,backend,nginx
+      ENVIRONMENT: development
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../backend/app/templates:/app/app/templates:ro
+      - tectonic_cache:/root/.cache/Tectonic
+    depends_on:
+      - tectonic
+
+  tectonic:
+    image: dxjoke/tectonic-docker:latest
+    volumes:
+      - tectonic_cache:/root/.cache/Tectonic
+    entrypoint: ["tectonic"]
+
+  frontend:
+    build:
+      context: ../frontend
+      args:
+        BACKEND_URL: http://backend:8000
+    depends_on:
+      - backend
+    environment:
+      BACKEND_URL: http://backend:8000
+    ports:
+      - "3000:3000"
+
+  nginx:
+    image: nginx:1.27-alpine
+    depends_on:
+      - backend
+      - frontend
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/certs:/etc/nginx/certs:ro
+
+volumes:
+  tectonic_cache:

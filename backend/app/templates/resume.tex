@@ -1,0 +1,45 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\begin{document}
+
+{{ contact_block }}
+
+{% if summary %}
+\section*{Summary}
+{{ summary }}
+{% endif %}
+
+{% if work_experience_block %}
+\section*{Experience}
+{{ work_experience_block }}
+{% endif %}
+
+{% if skills_block %}
+\section*{Skills}
+{{ skills_block }}
+{% endif %}
+
+{% if education_block %}
+\section*{Education}
+{{ education_block }}
+{% endif %}
+
+{% if projects_block %}
+\section*{Projects}
+{{ projects_block }}
+{% endif %}
+
+{% if achievements_block %}
+\section*{Achievements}
+{{ achievements_block }}
+{% endif %}
+
+{% if certifications_block %}
+\section*{Certifications}
+{{ certifications_block }}
+{% endif %}
+
+\end{document}
