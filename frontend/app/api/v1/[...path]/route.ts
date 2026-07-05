@@ -3,7 +3,30 @@ import { type NextRequest } from "next/server";
 const BACKEND_URL = process.env.BACKEND_URL ?? "http://localhost:8000";
 const PROXY_TIMEOUT_MS = 180_000;
 
+const SKIP_RESPONSE_HEADERS = new Set([
+  "connection",
+  "content-encoding",
+  "content-length",
+  "keep-alive",
+  "proxy-authenticate",
+  "proxy-authorization",
+  "te",
+  "trailer",
+  "transfer-encoding",
+  "upgrade",
+]);
+
 type RouteContext = { params: Promise<{ path: string[] }> };
+
+function buildResponseHeaders(upstream: Headers): Headers {
+  const headers = new Headers();
+  upstream.forEach((value, key) => {
+    if (!SKIP_RESPONSE_HEADERS.has(key.toLowerCase())) {
+      headers.set(key, value);
+    }
+  });
+  return headers;
+}
 
 async function proxyRequest(
   request: NextRequest,
@@ -33,11 +56,12 @@ async function proxyRequest(
   }
 
   const response = await fetch(targetUrl, init);
+  const body = await response.arrayBuffer();
 
-  return new Response(response.body, {
+  return new Response(body, {
     status: response.status,
     statusText: response.statusText,
-    headers: response.headers,
+    headers: buildResponseHeaders(response.headers),
   });
 }
 
